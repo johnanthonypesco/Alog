@@ -39,7 +39,7 @@
             <img src="{{asset('images/Logo.png')}}" alt="Logo" class="w-36">
         </div>
 
-        <div class="absolute hidden md:block bottom-0 right-0 w-36 md:w-48">
+        <div class="absolute bottom-0 right-0 w-36 md:w-48">
             <img src="{{asset('images/Flower 4 - Green.png')}}" alt="Flower">
         </div>
     </div>
