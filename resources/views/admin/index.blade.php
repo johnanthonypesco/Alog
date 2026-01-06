@@ -12,34 +12,34 @@
     <h1 class="p-4 rounded-lg bg-white text-green-800 font-bold text-2xl text-center">
         ALOG AGRICULTURAL SUPPLY
     </h1>
-    <div class="bg-white p-10 rounded-3xl w-full max-w-2xl flex flex-col-reverse md:flex-row items-center gap-5 relative">
+    <div class="bg-white p-10 rounded-3xl w-full max-w-3xl flex flex-col-reverse md:flex-row items-center gap-5 relative">
         <div class="w-full md:max-w-[60%]">
-            <h1 class="text-2xl text-green-800 font-semibold">Owner Login</h1>
+            <h1 class="text-3xl text-green-800 font-semibold">Owner Login</h1>
             <form action="" class="mt-10">
-                <input type="text" placeholder="Enter your Email" class="outline-none p-2 border-2 border-green-800 w-full rounded-lg">
+                <input type="text" placeholder="Enter your Email" class="outline-none p-3 border-2 border-green-800 w-full rounded-lg">
                 <div class="relative mt-5">
-                    <input type="password" placeholder="Enter your Password" class="outline-none p-2 border-2 border-green-800 w-full rounded-lg mt-3">
-                    <div class="cursor-pointer w-fit absolute top-9 right-3 -translate-y-1/2">
+                    <input type="password" placeholder="Enter your Password" class="outline-none p-3 border-2 border-green-800 w-full rounded-lg mt-3">
+                    <div class="cursor-pointer w-fit absolute top-9.5 right-3 -translate-y-1/2">
                         <img src="{{ asset('images/eye closed.png') }}" alt="showpassword" class="w-8 h-8">
                     </div>
                 </div>
 
                 <div class="flex items-center gap-2 mt-5">
-                    <input type="checkbox" id="rememberme" class="w-6 h-6 outline-none border-2 border-green-800">
-                    <label for="rememberme" class="text-green-800 font-semibold">Remember Me</label>
+                    <input type="checkbox" id="rememberme" class="w-7 h-7 outline-none border-2 border-green-800">
+                    <label for="rememberme" class="text-green-800 font-semibold text-xl">Remember Me</label>
                 </div>
 
-                <button class="bg-[#EB7100] text-white font-semibold px-8 py-2 rounded-2xl mt-5 hover:bg-green-900 transition hover:-translate-y-1 w-fit">
+                <button class="bg-[#EB7100] text-white font-semibold px-8 py-2 rounded-2xl mt-8 hover:bg-green-900 transition hover:-translate-y-1 w-fit text-xl flex items-center justify-center">
                     Sign In
                 </button>
             </form>
         </div>
 
         <div class="w-full md:max-w-[40%] h-fit md:h-72 flex flex-col items-center">
-            <img src="{{asset('images/Logo.png')}}" alt="Logo" class="w-32">
+            <img src="{{asset('images/Logo.png')}}" alt="Logo" class="w-36">
         </div>
 
-        <div class="absolute bottom-0 right-0 w-36 md:w-46">
+        <div class="absolute hidden md:block bottom-0 right-0 w-36 md:w-48">
             <img src="{{asset('images/Flower 4 - Green.png')}}" alt="Flower">
         </div>
     </div>
