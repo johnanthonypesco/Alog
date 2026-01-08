@@ -1,0 +1,13 @@
+nav li a{
+    padding: 10px;
+}
+nav a:hover{
+    background-color: #ffffff;
+    color: #046636;
+    border-radius: 10px 0px 0px 10px;
+}
+.active{
+    background-color: #ffffff;
+    color: #046636;
+    border-radius: 10px 0px 0px 10px;
+}
