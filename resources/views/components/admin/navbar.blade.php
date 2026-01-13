@@ -39,7 +39,7 @@
             </ul>
         </li>
 
-        <a href="{{route('admin.employeeaccount')}}" class="text-xl font-bold p-2 ml-5 {{ request()->routeIs('admin.employeeaccount') ? 'active' : '' }}">Employees</a>
+        <a href="{{route('admin.employee')}}" class="text-xl font-bold p-2 ml-5 {{ request()->routeIs('admin.employeeaccount') ? 'active' : '' }}">Employees</a>
         
         <li class="w-full pl-5">
             <a href="#" onclick="openmenu(event, 'accounts')" class="text-xl font-bold flex items-center justify-between p-2 pl-6">

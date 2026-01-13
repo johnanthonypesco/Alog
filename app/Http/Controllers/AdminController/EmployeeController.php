@@ -9,6 +9,6 @@ class EmployeeController extends Controller
 {
     public function showEmployee()
     {
-        return view('admin.employeeaccount');
+        return view('admin.employee');
     }
 }

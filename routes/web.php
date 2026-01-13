@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [LoginController::class, 'showLogin'])->name('admin.login');
 Route::get('/2fa', [TwofactorController::class, 'showTwofactor'])->name('admin.2fa');
-Route::get('/employee', [EmployeeController::class, 'showEmployee'])->name('admin.employeeaccount');
+Route::get('/employee', [EmployeeController::class, 'showEmployee'])->name('admin.employee');
 
 
 require __DIR__.'/auth.php';
