@@ -27,8 +27,11 @@ function editemployeemodal() {
 
     if (!editEmployeeBtn || !modalContainer || !closeBtn) return;
 
-    editEmployeeBtn.addEventListener('click', () => {
-        modalContainer.classList.remove('hidden');
+    const editEmployeeBtns = document.querySelectorAll('#editemployeebtn');
+    editEmployeeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modalContainer.classList.remove('hidden');
+        });
     });
 
     closeBtn.addEventListener('click', () => {
@@ -92,8 +95,11 @@ function editemployeerole() {
 
     if (!editEmployeeRoleBtn || !modalContainer || !closeBtn) return;
 
-    editEmployeeRoleBtn.addEventListener('click', () => {
-        modalContainer.classList.remove('hidden');
+    const editEmployeeRoleBtns = document.querySelectorAll('#editemployeerolebtn');
+    editEmployeeRoleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modalContainer.classList.remove('hidden');
+        });
     });
 
     closeBtn.addEventListener('click', () => {
@@ -128,6 +134,50 @@ function viewarchiverole() {
         }
     });
 }
+function viewarchive() {
+    const viewArchiveBtn = document.getElementById('viewarchivebtn');
+    const modalContainer = document.querySelector('#viewarchivemodal').parentElement;
+    const closeBtn = document.getElementById('closeviewarchivemodal');
+
+    if (!viewArchiveBtn || !modalContainer || !closeBtn) return;
+
+    viewArchiveBtn.addEventListener('click', () => {
+        modalContainer.classList.remove('hidden');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modalContainer.classList.add('hidden');
+    });
+
+    modalContainer.addEventListener('click', (e) => {
+        if (e.target === modalContainer) {
+            modalContainer.classList.add('hidden');
+        }
+    });
+}
+function cashadvancement() {
+    const cashAdvancementBtns = document.querySelectorAll('#cashadvancementbtn');
+    const modalContainer = document.querySelector('#cashadvancementmodal').parentElement;
+    const closeBtn = document.getElementById('closecashadvancementmodal');
+
+    if (!cashAdvancementBtns || !modalContainer || !closeBtn) return;
+
+    cashAdvancementBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modalContainer.classList.remove('hidden');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modalContainer.classList.add('hidden');
+    });
+
+    modalContainer.addEventListener('click', (e) => {
+        if (e.target === modalContainer) {
+            modalContainer.classList.add('hidden');
+        }
+    });
+}
 
 
 document.addEventListener('DOMContentLoaded', createemployeemodal);
@@ -136,3 +186,5 @@ document.addEventListener('DOMContentLoaded', addrole);
 document.addEventListener('DOMContentLoaded', createemployeerole);
 document.addEventListener('DOMContentLoaded', editemployeerole);
 document.addEventListener('DOMContentLoaded', viewarchiverole);
+document.addEventListener('DOMContentLoaded', viewarchive);
+document.addEventListener('DOMContentLoaded', cashadvancement);
