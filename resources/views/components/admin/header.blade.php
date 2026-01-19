@@ -1,6 +1,6 @@
 @props(['title' => 'Title', 'subtitle' => 'Subtitle'])
 
-<header id="header" class="bg-[#046636] fixed top-0 left-0 right-0 ml-0 md:left-64 h-20 flex items-center justify-between px-10 transition-all duration-300 ease-in-out">
+<header id="header" class="bg-[#046636] fixed top-0 left-0 right-0 ml-0 md:left-64 h-20 flex items-center justify-between px-10 transition-all duration-300 ease-in-out z-1">
     <h1 class="text-xl font-bold text-white p-5">
         <span>{{ $title }}</span> 
         <i class="fa-solid fa-angle-right mx-2"></i> 

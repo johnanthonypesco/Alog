@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/admin/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/products.css') }}">
+    <title>AAS</title>
+</head>
+<body>
+    <x-admin.navbar />
+
+    <main class="ml-0 md:ml-64 px-5 md:px-10 min-h-screen transition-all duration-300 ease-in-out" id="main">
+        <x-admin.header title="Inventory" subtitle="Products" />
+
+        <div class="mt-24 flex flex-col lg:flex-row lg:justify-between">
+            <div class="flex flex-col gap-5">
+                <div class="flex gap-5">
+                    <button class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
+                        Register Category
+                    </button>
+                    <button class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
+                        Archived Category
+                    </button>
+                </div>
+                <select name="category" id="category" class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
+                    <option value="fertilizer">Fertilizer</option>
+                    <option value="fertilizer">Chemicals</option>
+                </select>
+            </div>
+            <div class="flex gap-2 flex-col items-end w-ful lg:w-1/3 mt-5 md:mt-5">
+                <div class="relative w-full">
+                    {{-- search bar --}}
+                    <div class="bg-[#046636] w-fit py-1 px-2 text-white rounded-full absolute right-2 top-1"><i class="fa-solid fa-search"></i></div>
+                    <input type="search" placeholder="Search" class="w-full bg-[#046636]/20 border-2 border-[#046636] p-2 px-4 font-bold text-[#046636] rounded-3xl">
+                </div>
+                <button class="bg-[#046636]/20 border-2 border-[#046636] p-1 rounded-3xl px-5 text-[#046636] w-full md:w-fit items-end"><i class="fa-solid fa-filter text-[#046636]"></i>Filters</button>
+            </div>
+        </div>
+        
+        
+        {{-- category button --}}
+        <div class="mt-10 flex flex-col md:flex-row md:justify-between gap-5">
+            {{-- Category Title --}}
+            <div class="flex gap-2 items-center">
+                <h1 class="text-2xl font-semibold text-[#EB7100]">Fertilizers</h1>
+                <button class="p-2 bg-blue-200 rounded-md">
+                    <i class="fa-solid fa-pencil text-blue-700"></i>
+                </button>
+                <button class="p-2 bg-red-200 rounded-md">
+                    <i class="fa-solid fa-trash text-red-700"></i>
+                </button>
+            </div>
+
+            {{-- archived and add product --}}
+            <div class="flex gap-2">
+                <button class="bg-[#046636]/20 border-2 border-[#046636] p-1 rounded-lg px-5 text-[#046636] font-bold w-fit items-end">
+                    Add Product
+                </button>
+                <button class="bg-[#046636]/20 border-2 border-[#046636] p-1 rounded-lg px-5 text-[#046636] font-bold w-fit items-end">
+                    Archived Products
+                </button>
+            </div>
+        </div>
+
+        {{-- table --}}
+        <div class="overflow-auto mt-5 rounded-lg border-2 border-[#046636] ">
+            <table class="w-full sticky top-0">
+                <thead class="bg-[#046636]/20">
+                    <tr>
+                        <th class="text-md">
+                            <div class="flex items-center gap-2">
+                                <h1>Product</h1>
+                                <button>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                             <div class="flex items-center gap-2">
+                                <h1>Type</h1>
+                                <button>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                             <div class="flex items-center gap-2">
+                                <h1>UoM</h1>
+                                <button>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </th>
+                        <th>SRP</th>
+                        <th>Unit Cost</th>
+                        <th>Average Cost</th>
+                        <th class="flex items-center flex-col">
+                            <p class="border-b-2 border-[#EB7100] w-fit ">Amounts</p>
+                            <p class="text-[#EB7100]">Contents</p>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="flex flex-col">
+                            <div class="flex gap-2 items-center">
+                                <h1>14-14-14</h1>
+                                <button class="p-2 bg-orange-200 rounded-md">
+                                    <i class="fa-solid fa-folders text-orange-700"></i>
+                                </button>
+                            </div>
+                            <h1 class="font-bold">Swire</h1>
+                        </td>
+                        <td class="text-center">Box</td>
+                        <td class="text-center">Boxes</td>
+                        <td class="text-center">
+                            ₱ 1,204.04
+                        </td>
+                        <td class="text-center">
+                            ₱ 1,190.12
+                        </td>
+                        <td class="text-center">
+                            ₱ 12.30
+                        </td>
+                        <td>
+                            <p class="text-center">₱ 138,372.12</p>
+                            <p class="text-[#EB7100] font-bold text-center">50</p>
+                        </td>
+                        <td class="flex items-center justify-center gap-2">
+                            <button class="p-2 bg-blue-200 rounded-md">
+                                <i class="fa-solid fa-pencil text-blue-700"></i>
+                            </button>
+                            <button class="p-2 bg-red-200 rounded-md">
+                                <i class="fa-solid fa-trash text-red-700"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+<script src="{{ asset('js/admin/navbar.js') }}"></script>
+</html>
