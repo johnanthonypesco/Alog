@@ -71,11 +71,42 @@ function shrink() {
     const logout = document.getElementById('logout');
     const logouttext = document.getElementById('logouttext');
     const navlinks = nav.querySelectorAll('a');
+    const shrink2 = document.getElementById('shrink2');
 
     if (!shrinkBtn) return;
 
     shrinkBtn.addEventListener('click', () => {
         if (nav.classList.contains('md:w-64')) {
+            shrink2.classList.remove('hidden');
+            shrinkBtn.classList.add('hidden');
+            nav.classList.remove('md:w-64');
+            nav.classList.add('md:w-0');
+            main?.classList.remove('md:ml-64');
+            main?.classList.add('md:ml-0');
+            header?.classList.remove('md:left-64');
+            header?.classList.add('md:left-0');
+            logouttext.style.display = 'none';
+            logout.classList.add('md:w-0');
+            logout.classList.remove('md:w-58');  // assuming w-58 is typo for w-60 or similar
+            navlinks.forEach(link => link.classList.add('hidden'));
+        } else {
+            shrinkBtn.classList.add('hidden');
+            shrink2.classList.remove('hidden');
+            nav.classList.remove('md:w-0');
+            nav.classList.add('md:w-64');
+            main?.classList.remove('md:ml-0');
+            main?.classList.add('md:ml-64');
+            header?.classList.remove('md:left-0');
+            header?.classList.add('md:left-64');
+            logouttext.style.display = 'inline';
+            logout.classList.remove('md:w-0');
+            logout.classList.add('md:w-58');
+            navlinks.forEach(link => link.classList.remove('hidden'));
+        }
+    });
+    shrink2.addEventListener('click', () => {
+        if (nav.classList.contains('md:w-64')) {
+            shrinkBtn.classList.remove('hidden');
             nav.classList.remove('md:w-64');
             nav.classList.add('md:w-20');
             main?.classList.remove('md:ml-64');
@@ -87,6 +118,8 @@ function shrink() {
             logout.classList.remove('md:w-58');  // assuming w-58 is typo for w-60 or similar
             navlinks.forEach(link => link.classList.add('hidden'));
         } else {
+            shrink2.classList.add('hidden');
+            shrinkBtn.classList.remove('hidden');
             nav.classList.remove('md:w-20');
             nav.classList.add('md:w-64');
             main?.classList.remove('md:ml-20');
