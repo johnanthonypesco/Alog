@@ -19,7 +19,7 @@
         <div class="mt-24 flex flex-col lg:flex-row lg:justify-between">
             <div class="flex flex-col gap-5">
                 <div class="flex gap-5">
-                    <button class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
+                    <button id="addnewcategorybtn" class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
                         Register Category
                     </button>
                     <button class="bg-[#046636]/20 border-2 border-[#046636] p-2 rounded-lg font-bold text-[#046636]">
@@ -143,8 +143,39 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- add new category modal --}}
+        <x-admin.modal modalid="addnewcategorymodal" modaltitle="Create Category" closemodal="closeaddnewcategorymodal" modalwidth="max-w-md">
+            {{-- form --}}
+            <form action="#" class="w-full">
+                <label for="name" class="text-[#046636] font-semibold text-xl">Name:</label>
+                <div class="mt-2 relative">
+                    <input type="text" name="name" id="name" class="w-full px-5 py-2.5 border-2 border-[#046636] rounded-lg focus:outline-2 outline-[#046636] placeholder:text-lg placeholder:text-[#046636]/40 placeholder:font-semibold text-base" placeholder="Enter category's name">
+                    <p class="text-red-700 font-bold text-xl absolute top-1 right-2">*</p>
+                </div>
+
+                <button type="submit" class="w-full mt-5 bg-[#046636] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-[#035128] transition">Create</button>
+            </form>
+        </x-admin.modal>
     </main>
 
 </body>
 <script src="{{ asset('js/admin/navbar.js') }}"></script>
+<script>
+    function addnewcategory(){
+        const modal = document.getElementById('addnewcategorymodal');
+        const closemodal = document.getElementById('closeaddnewcategorymodal');
+        const btn = document.getElementById('addnewcategorybtn');
+
+        btn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closemodal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
+
+    addnewcategory();
+</script>
 </html>

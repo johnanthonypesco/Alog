@@ -1,6 +1,6 @@
 function createemployeemodal() {
     const addEmployeeBtn = document.getElementById('addemployeebtn');
-    const modalContainer = document.querySelector('#createemployeemodal').parentElement;
+    const modalContainer = document.querySelector('#createemployeemodal');
     const closeBtn = document.getElementById('closecreateemployeemodal');
 
     if (!addEmployeeBtn || !modalContainer || !closeBtn) return;
@@ -22,7 +22,7 @@ function createemployeemodal() {
 
 function editemployeemodal() {
     const editEmployeeBtn = document.getElementById('editemployeebtn');
-    const modalContainer = document.querySelector('#editemployeemodal').parentElement;
+    const modalContainer = document.querySelector('#editemployeemodal');
     const closeBtn = document.getElementById('closeeditemployeemodal');
 
     if (!editEmployeeBtn || !modalContainer || !closeBtn) return;
@@ -48,7 +48,7 @@ function editemployeemodal() {
 
 function addrole() {
     const createRoleBtn = document.getElementById('createrolebtn');
-    const modalContainer = document.querySelector('#createrolemodal').parentElement;
+    const modalContainer = document.querySelector('#createrolemodal');
     const closeBtn = document.getElementById('closecreaterolemodal');
 
     if (!createRoleBtn || !modalContainer || !closeBtn) return;
@@ -69,7 +69,7 @@ function addrole() {
 }
 function createemployeerole() {
     const createEmployeeRoleBtn = document.getElementById('rolemanagementcreatebtn');
-    const modalContainer = document.querySelector('#createemployeerolemodal').parentElement;
+    const modalContainer = document.querySelector('#createemployeerolemodal');
     const closeBtn = document.getElementById('closecreateemployeerolemodal');
 
     if (!createEmployeeRoleBtn || !modalContainer || !closeBtn) return;
@@ -90,7 +90,7 @@ function createemployeerole() {
 }
 function editemployeerole() {
     const editEmployeeRoleBtn = document.getElementById('editemployeerolebtn');
-    const modalContainer = document.querySelector('#editemployeerolemodal').parentElement;
+    const modalContainer = document.querySelector('#editemployeerolemodal');
     const closeBtn = document.getElementById('closeeditemployeerolemodal');
 
     if (!editEmployeeRoleBtn || !modalContainer || !closeBtn) return;
@@ -115,7 +115,7 @@ function editemployeerole() {
 
 function viewarchiverole() {
     const viewArchiveRoleBtn = document.getElementById('viewarchiverolebtn');
-    const modalContainer = document.querySelector('#viewarchiverolemodal').parentElement;
+    const modalContainer = document.querySelector('#viewarchiverolemodal');
     const closeBtn = document.getElementById('closeviewarchiverolemodal');
 
     if (!viewArchiveRoleBtn || !modalContainer || !closeBtn) return;
@@ -136,7 +136,7 @@ function viewarchiverole() {
 }
 function viewarchive() {
     const viewArchiveBtn = document.getElementById('viewarchivebtn');
-    const modalContainer = document.querySelector('#viewarchivemodal').parentElement;
+    const modalContainer = document.querySelector('#viewarchivemodal');
     const closeBtn = document.getElementById('closeviewarchivemodal');
 
     if (!viewArchiveBtn || !modalContainer || !closeBtn) return;
@@ -157,7 +157,7 @@ function viewarchive() {
 }
 function cashadvancement() {
     const cashAdvancementBtns = document.querySelectorAll('#cashadvancementbtn');
-    const modalContainer = document.querySelector('#cashadvancementmodal').parentElement;
+    const modalContainer = document.querySelector('#cashadvancementmodal');
     const closeBtn = document.getElementById('closecashadvancementmodal');
 
     if (!cashAdvancementBtns || !modalContainer || !closeBtn) return;
