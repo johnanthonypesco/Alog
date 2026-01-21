@@ -1,4 +1,4 @@
-<nav class="bg-[#046636] h-full w-0 md:w-64 flex flex-col justify-between items-center fixed left-0 top-0 py-5 overflow-hidden transition-all duration-300 ease-in-out" id="nav">
+<nav class="bg-[#046636] h-full w-0 md:w-64 flex flex-col justify-between items-center fixed left-0 top-0 py-5 overflow-hidden transition-all duration-300 ease-in-out z-1" id="nav">
     <div class="flex items-center justify-center relative">
         <img src="{{asset('images/Logo.png')}}" alt="Logo" class="w-32">
         <button class="bg-white rounded-sm p-1 absolute -bottom-10 -right-15 cursor-pointer hidden md:block" id="shrink">
@@ -16,8 +16,8 @@
                 {{-- menu na ilalagay dito para sa accounting --}}
                 <li class="flex flex-col gap-1 text-white text-sm font-semibold mt-2 w-full pl-6">
                     <a href="{{route('admin.inventory.currentstock')}}" class="text-lg {{ request()->routeIs('admin.inventory.currentstock') ? 'active' : '' }}">Current Stocks</a>
-                    <a href="#" class="text-lg">For Release</a>
-                    <a href="#" class="text-lg">Products</a>
+                    <a href="" class="text-lg">For Release</a>
+                    <a href="{{route('admin.inventory.products')}}" class="text-lg {{ request()->routeIs('admin.inventory.products') ? 'active' : ''}}">Products</a>
                     <a href="#" class="text-lg">Suppliers and Branches</a>
                 </li>
             </ul>

@@ -11,4 +11,8 @@ class InventoryController extends Controller
     {
         return view('admin.inventory.currentstock');
     }
+
+    public function showProducts(){
+        return view('admin.inventory.products');
+    }
 }
