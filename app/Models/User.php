@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id', // <--- ADD THIS to allow mass assignment
     ];
 
     /**
@@ -44,5 +45,19 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // The Provider needs this function to work!
+    public function hasPermission($permissionName)
+    {
+        if (!$this->role) return false;
+        
+        // Check if the permission name exists in the user's role permissions
+        return $this->role->permissions->contains('name', $permissionName);
     }
 }
