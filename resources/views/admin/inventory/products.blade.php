@@ -47,7 +47,7 @@
             {{-- Category Title --}}
             <div class="flex gap-2 items-center">
                 <h1 class="text-2xl font-semibold text-[#EB7100]">Fertilizers</h1>
-                <button class="p-2 bg-blue-200 rounded-md">
+                <button id="editcategorybtn" class="p-2 bg-blue-200 rounded-md">
                     <i class="fa-solid fa-pencil text-blue-700"></i>
                 </button>
                 <button class="p-2 bg-red-200 rounded-md">
@@ -110,7 +110,7 @@
                         <td class="flex flex-col">
                             <div class="flex gap-2 items-center">
                                 <h1>14-14-14</h1>
-                                <button class="p-2 bg-orange-200 rounded-md">
+                                <button id="productdetailsbtn" class="p-2 bg-orange-200 rounded-md">
                                     <i class="fa-solid fa-folders text-orange-700"></i>
                                 </button>
                             </div>
@@ -157,6 +157,135 @@
                 <button type="submit" class="w-full mt-5 bg-[#046636] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-[#035128] transition">Create</button>
             </form>
         </x-admin.modal>
+
+        {{-- edit category modal --}}
+        <x-admin.modal modalid="editcategorymodal" modaltitle="Edit Category" closemodal="closeeditcategorymodal" modalwidth="max-w-md">
+            {{-- form --}}
+            <form action="#" class="w-full">
+                <label for="name" class="text-[#046636] font-semibold text-xl">Name:</label>
+                <div class="mt-2 relative">
+                    <input type="text" name="name" id="name" class="w-full px-5 py-2.5 border-2 border-[#046636] rounded-lg focus:outline-2 outline-[#046636] placeholder:text-lg placeholder:text-[#046636]/40 placeholder:font-semibold text-base" placeholder="Enter category's name">
+                    <p class="text-red-700 font-bold text-xl absolute top-1 right-2">*</p>
+                </div>
+
+                <button type="submit" class="w-full mt-5 bg-[#046636] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-[#035128] transition">Create</button>
+            </form>
+        </x-admin.modal>
+        
+        <x-admin.modal modalid="productdetailsmodal" modaltitle="Product's Details" closemodal="closeproductdetailsmodal" modalwidth="max-w-2xl">
+            <h1 class="mt-5 text-[#046636] font-bold text-xl">Container Inside:</h1>
+            {{-- table --}}
+            <div class="mt-2 max-h-[30vh] rounded-lg border-2 border-[#046636]">
+                <table class="w-full">
+                    <thead class="bg-gray-200 sticky top-0">
+                        <tr>
+                            <th class="text-md text-center">
+                                Type
+                            </th>
+                            <th class="text-center">
+                                UoM
+                            </th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td class="text-center">Sache</td>
+                            <td class="text-center">None</td>
+                            <td>
+                                <button class="bg-blue-200 p-2 rounded-lg">
+                                    <i class="fa-solid fa-pencil text-blue-700"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h1 class="mt-5 text-[#046636] font-bold text-xl">Container Inside:</h1>
+            <h1 class="mt-2 text-[#EB7100] font-bold text-lg">Received On: <span class="font-semibold text-[#046636]">January 14,2026</span></h1>
+
+            <div class="mt-2 max-h-[30vh] overflow-auto  rounded-lg border-2 border-[#046636]">
+                <table class="w-full">
+                    <thead class="bg-gray-200 sticky top-0">
+                        <tr>
+                            <th class="text-md text-center flex item-center gap-2 justify-center">
+                                <h1>Supplier</h1>
+                                <button>
+                                    <i class="fa-solid fa-angle-down text-[#EB7100]"></i>
+                                </button>
+                            </th>
+                            <th class="text-center">
+                                Ref No.
+                            </th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td class="text-center">AgriCompnay</td>
+                            <td class="text-center">128732</td>
+                            <td class="flex gap-2 justify-center items-center">
+                                <button class="bg-[#046636] p-1 px-3 text-white font-semibold rounded-lg">View Details</button>
+                                <button class="border-2 border-[#046636] p-1 px-3 rounded-lg">
+                                    <i class="fa-solid fa-print text-[#046636]"></i>
+                                    <span>Print</span>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">AgriCompnay</td>
+                            <td class="text-center">128732</td>
+                            <td class="flex gap-2 justify-center items-center">
+                                <button class="bg-[#046636] p-1 px-3 text-white font-semibold rounded-lg">View Details</button>
+                                <button class="border-2 border-[#046636] p-1 px-3 rounded-lg">
+                                    <i class="fa-solid fa-print text-[#046636]"></i>
+                                    <span>Print</span>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">AgriCompnay</td>
+                            <td class="text-center">128732</td>
+                            <td class="flex gap-2 justify-center items-center">
+                                <button class="bg-[#046636] p-1 px-3 text-white font-semibold rounded-lg">View Details</button>
+                                <button class="border-2 border-[#046636] p-1 px-3 rounded-lg">
+                                    <i class="fa-solid fa-print text-[#046636]"></i>
+                                    <span>Print</span>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">AgriCompnay</td>
+                            <td class="text-center">128732</td>
+                            <td class="flex gap-2 justify-center items-center">
+                                <button class="bg-[#046636] p-1 px-3 text-white font-semibold rounded-lg">View Details</button>
+                                <button class="border-2 border-[#046636] p-1 px-3 rounded-lg">
+                                    <i class="fa-solid fa-print text-[#046636]"></i>
+                                    <span>Print</span>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">AgriCompnay</td>
+                            <td class="text-center">128732</td>
+                            <td class="flex gap-2 justify-center items-center">
+                                <button class="bg-[#046636] p-1 px-3 text-white font-semibold rounded-lg">View Details</button>
+                                <button class="border-2 border-[#046636] p-1 px-3 rounded-lg">
+                                    <i class="fa-solid fa-print text-[#046636]"></i>
+                                    <span>Print</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </x-admin.modal>
+
     </main>
 
 </body>
@@ -176,6 +305,36 @@
         });
     }
 
+    function editcategory(){
+        const modal = document.getElementById('editcategorymodal');
+        const closemodal = document.getElementById('closeeditcategorymodal');
+        const btn = document.getElementById('editcategorybtn');
+
+        btn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closemodal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
+    
+    function productdetailsmodal(){
+        const modal = document.getElementById('productdetailsmodal');
+        const closemodal = document.getElementById('closeproductdetailsmodal');
+        const btn = document.getElementById('productdetailsbtn');
+
+        btn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closemodal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
+    
     addnewcategory();
+    editcategory(); 
+    productdetailsmodal();
 </script>
 </html>

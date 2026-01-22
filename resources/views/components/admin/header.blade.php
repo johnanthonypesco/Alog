@@ -9,7 +9,7 @@
             <i class="fa-solid fa-arrows-maximize text-[#EB7100] text-xl"></i>
         </button>
     </h1>
-    <div class="bg-white p-2 rounded-xl shadow-md hidden md:block">
+    <div class="bg-white p-1 px-4 rounded-2xl shadow-md hidden md:block">
         <h1 class="font-bold text-[#EB7100] text-lg text-center">Owner</h1>
         <p class="text-sm text-center text-gray-600">owner@gmail.com</p>
     </div>
