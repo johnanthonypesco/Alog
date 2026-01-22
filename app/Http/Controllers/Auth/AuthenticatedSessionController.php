@@ -46,7 +46,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         // 4. Redirect to Dashboard (or intended page)
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
     /**
