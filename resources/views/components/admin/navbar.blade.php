@@ -18,7 +18,7 @@
                     <a href="{{route('admin.inventory.currentstock')}}" class="text-lg {{ request()->routeIs('admin.inventory.currentstock') ? 'active' : '' }}">Current Stocks</a>
                     <a href="" class="text-lg">For Release</a>
                     <a href="{{route('admin.inventory.products')}}" class="text-lg {{ request()->routeIs('admin.inventory.products') ? 'active' : ''}}">Products</a>
-                    <a href="{{route('admin.suppliers.index')}}" class="text-lg">Suppliers</a>
+                    <a href="{{route('admin.suppliers.index')}}" class="text-lg {{ request()->routeIs('admin.suppliers.index') ? 'active' : '' }}">Suppliers</a>
                 </li>
             </ul>
         </li>

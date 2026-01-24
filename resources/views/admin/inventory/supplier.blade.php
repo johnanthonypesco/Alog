@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAS Suppliers</title>
+    <title>AAS</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/admin/navbar.css') }}">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
+<style>
+    .toggle-checkbox:checked {
+        right: 0;
+        border-color: #046636;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+        background-color: #046636;
+    }
+    .toggle-checkbox {
+        right: 50%;
+        transition: all 0.3s;
+    }
+    .toggle-label {
+        width: 3rem;
+    }
+</style>
 <body class="bg-gray-50">
 
     <x-admin.navbar />
@@ -318,23 +335,6 @@
 
     </main>
 
-    <style>
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #046636;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #046636;
-        }
-        .toggle-checkbox {
-            right: 50%;
-            transition: all 0.3s;
-        }
-        .toggle-label {
-            width: 3rem;
-        }
-    </style>
-
     <script>
         window.onclick = function(event) {
             const modal = document.getElementById('addsuppliermodal');
@@ -343,5 +343,6 @@
             }
         }
     </script>
+<script src="{{ asset('js/admin/navbar.js') }}"></script>
 </body>
 </html>

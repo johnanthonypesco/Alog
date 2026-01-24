@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/inventory/category/store', [ProductController::class, 'storeCategory'])->name('category.store');
     Route::post('/inventory/product/store', [ProductController::class, 'storeProduct'])->name('product.store');
 
-    Route::get('/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers.index');
+    Route::get('/inventory/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers.index');
 Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
 });
 
