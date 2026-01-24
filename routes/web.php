@@ -5,12 +5,13 @@ use App\Http\Controllers\ProfileController;
 
 // Existing Admin Controllers
 use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\Admin\StockInController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
-use App\Http\Controllers\AdminController\LoginController;
 
 // NEW: Import the ProductController we just created
+use App\Http\Controllers\AdminController\LoginController;
 use App\Http\Controllers\AdminController\EmployeeController;
 use App\Http\Controllers\AdminController\TwofactorController;
 
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers.index');
 Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
+
+Route::get('/inventory/stock-in', [StockInController::class, 'index'])->name('stock_in.index');
+Route::post('/inventory/stock-in', [StockInController::class, 'store'])->name('stock_in.store');
 });
 
 require __DIR__.'/auth.php';
