@@ -171,7 +171,7 @@
     </table>
 </div>
         <div id="addnewcategorymodal" class="fixed inset-0 z-50 hidden bg-gray-900/60 flex items-center justify-center backdrop-blur-sm transition-opacity">
-            <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden transform scale-100 transition-transform">
+            <div class="modal bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden transform scale-100 transition-transform">
                 <div class="bg-[#046636] p-4 flex justify-between items-center text-white">
                     <h2 class="text-lg font-bold"><i class="fa-solid fa-layer-group"></i> New Category</h2>
                     <button onclick="document.getElementById('addnewcategorymodal').classList.add('hidden')" class="hover:text-gray-200 transition">
@@ -192,9 +192,9 @@
         </div>
 
         <div id="addproductmodal" class="fixed inset-0 z-50 hidden bg-gray-900/60 flex items-center justify-center backdrop-blur-sm overflow-y-auto py-10">
-            <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden relative">
+            <div class="modal bg-white rounded-xl shadow-2xl w-full max-w-2xl relative overflow-hidden">
                 
-                <div class="bg-[#046636] p-4 px-6 flex justify-between items-center text-white sticky top-0 z-10">
+                <div class="bg-[#046636] p-4 px-6 flex justify-between items-center text-white z-10">
                     <div>
                         <h2 class="text-xl font-bold">Create New Product</h2>
                         <p class="text-xs text-green-100 opacity-80">Define Base Unit & Containers</p>
@@ -204,7 +204,7 @@
                     </button>
                 </div>
                 
-                <form action="{{ route('product.store') }}" method="POST" class="p-6 space-y-6">
+                <form action="{{ route('product.store') }}" method="POST" class="p-6 space-y-6 max-h-[80vh] overflow-auto">
                     @csrf
                     <input type="hidden" name="category_id" value="{{ $selectedCategoryId }}">
 

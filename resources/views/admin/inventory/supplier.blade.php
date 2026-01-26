@@ -190,7 +190,7 @@
              class="fixed inset-0 z-50 hidden bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
              x-data="{ contacts: [{ name: '', position: '', email: '', numbers: [{ label: 'Mobile', number: '' }] }], isConsignment: false }">
 
-            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="modal bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
 
                 <!-- Header -->
                 <div class="bg-[#046636] px-6 py-5 md:px-8 flex justify-between items-center text-white shrink-0">
