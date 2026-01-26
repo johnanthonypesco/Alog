@@ -1,6 +1,6 @@
 <x-admin.modal modalid="archivedstockmodal" modaltitle="Archived Stock" closemodal="closearchivedstockmodal" modalwidth="max-w-6xl">
     <div class="w-full overflow-x-auto border-2 border-[#046636] rounded-xl mt-4">
-        <table class="w-full min-w-[1100px] text-[#046636]">
+        <table class="w-full text-[#046636]">
             <thead class="bg-[#046636]/10 text-[#046636] font-semibold">
                 <tr>
                     <th class="p-5 text-left">
