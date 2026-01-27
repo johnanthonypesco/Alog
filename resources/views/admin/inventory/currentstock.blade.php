@@ -14,7 +14,7 @@
     <x-admin.navbar />
 
     <main class="ml-0 md:ml-64 px-5 md:px-10 min-h-screen transition-all duration-300 ease-in-out" id="main">
-        <x-admin.header title="Accounts" subtitle="Employees" />
+        <x-admin.header title="Inventory" subtitle="Current Stock" />
 
         <div class="mt-24 flex flex-col lg:flex-row justify-between gap-2">
             <div id="filters" class="w-full lg:max-w-1/2 flex flex-col gap-2">

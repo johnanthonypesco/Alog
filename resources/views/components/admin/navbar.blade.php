@@ -16,7 +16,7 @@
                 {{-- menu na ilalagay dito para sa accounting --}}
                 <li class="flex flex-col gap-1 text-white text-sm font-semibold mt-2 w-full pl-6">
                     <a href="{{route('admin.inventory.currentstock')}}" class="text-lg {{ request()->routeIs('admin.inventory.currentstock') ? 'active' : '' }}">Current Stocks</a>
-                    <a href="" class="text-lg">For Release</a>
+                    <a href="{{route('admin.inventory.forrelease')}}" class="text-lg {{ request()->routeIs('admin.inventory.forrelease') ? 'active' : ''}}">For Release</a>
                     <a href="{{route('admin.inventory.products')}}" class="text-lg {{ request()->routeIs('admin.inventory.products') ? 'active' : ''}}">Products</a>
                     <a href="{{route('admin.suppliers.index')}}" class="text-lg {{ request()->routeIs('admin.suppliers.index') ? 'active' : '' }}">Suppliers</a>
                 </li>

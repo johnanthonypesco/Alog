@@ -1,0 +1,32 @@
+table th{
+    color: #046636;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 15px;
+}
+table th button{
+    color: #EB7100;
+    font-weight: bold;
+    font-size: 20px
+}
+table tbody tr td{
+    /* text-align: left; */
+    padding: 15px;
+    font-size: 15px;
+    color: #046636;
+    font-weight: 500;
+}
+table tbody tr:nth-child(even){
+    background-color: #d1d1d1b1;
+}
+.modal{
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

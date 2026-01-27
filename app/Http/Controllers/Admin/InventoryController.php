@@ -15,4 +15,8 @@ class InventoryController extends Controller
     public function showProducts(){
         return view('admin.inventory.products');
     }
+
+    public function forRelease(){
+        return view('admin.inventory.forrelease');
+    }
 }

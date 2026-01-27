@@ -14,7 +14,7 @@
     <x-admin.navbar />
 
     <main class="ml-0 md:ml-64 px-5 md:px-10 min-h-screen transition-all duration-300 ease-in-out pb-20" id="main">
-        <x-admin.header title="Partners" subtitle="Supplier Management" />
+        <x-admin.header title="Inventory" subtitle="Suppliers" />
 
         @if(session('success'))
         <div class="success mt-24 fixed top-0 right-10 z-50 bg-green-100 border-2 border-green-600 text-green-800 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
