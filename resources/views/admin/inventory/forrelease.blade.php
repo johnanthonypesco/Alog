@@ -223,10 +223,10 @@
             </table>
         </div>
 
-        {{-- inner container modal --}}
-        @include('components.admin.inventory.forrelease.innercontainermodal')
         {{-- create releases modal --}}
         @include('components.admin.inventory.forrelease.createreleasesmodal')
+        {{-- inner container modal --}}
+        @include('components.admin.inventory.forrelease.innercontainermodal')
 
         
         
