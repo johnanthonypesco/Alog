@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/InventoryBatch.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +10,19 @@ class InventoryBatch extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     * THIS IS THE CRITICAL FIX
+     * Automatically converts database date strings into Carbon objects
+     * allowing you to use ->format('M d, Y') in Blade.
+     */
+    protected $casts = [
+        'received_date' => 'date',
+        'expiry_date'   => 'date',
+        'due_date'      => 'date',
+        'is_consignment'=> 'boolean',
+        'is_paid'       => 'boolean',
+    ];
 
     // Helper: Calculate Effective Cost
     public static function calculateEffectiveCost($totalCost, $qtyPurchased, $qtyFree)

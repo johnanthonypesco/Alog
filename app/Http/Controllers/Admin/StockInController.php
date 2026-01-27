@@ -6,18 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\InventoryBatch;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class StockInController extends Controller
 {
     public function index()
     {
+        // 1. Fetch Data for Dropdowns (Modal)
         $suppliers = Supplier::where('is_active', true)->get();
-        // We get products with their units so the dropdown knows about Boxes/Cartons
-        $products = Product::with('units')->get(); 
+        $allProducts = Product::with('units')->where('alert_level', '>=', 0)->get();
         
-        return view('admin.inventory.currentstock', compact('suppliers', 'products'));
+        // 2. Fetch Data for the Table (Paginated)
+        $products = Product::with(['category', 'units', 'batches'])->paginate(15);
+        $categories = Category::all();
+
+        // 3. Return the View
+        return view('admin.inventory.currentstock', compact('suppliers', 'allProducts', 'products', 'categories'));
     }
 
     public function store(Request $request)
@@ -26,8 +33,8 @@ class StockInController extends Controller
             'supplier_id' => 'required|exists:suppliers,id',
             'product_id' => 'required|exists:products,id',
             'unit_type' => 'required', // "Base" or "Box" or "Carton"
-            'quantity' => 'required|numeric|min:1',
-            'free_quantity' => 'nullable|numeric|min:0',
+            'quantity' => 'required|numeric|min:1', // Qty PURCHASED (Paid)
+            'free_quantity' => 'nullable|numeric|min:0', // Qty FREE
             'total_cost' => 'required|numeric|min:0',
             'received_date' => 'required|date',
         ]);
@@ -46,52 +53,70 @@ class StockInController extends Controller
                 }
             }
 
-            // 2. CALCULATE TOTAL BASE UNITS
-            $baseQtyPurchased = $request->quantity * $multiplier;
-            $baseQtyFree = ($request->free_quantity ?? 0) * $multiplier;
-            $totalBaseQty = $baseQtyPurchased + $baseQtyFree;
+            // 2. CALCULATE QUANTITIES
+            $baseQtyPurchased = $request->quantity * $multiplier; // The items you PAID for
+            $baseQtyFree = ($request->free_quantity ?? 0) * $multiplier; // The items you got for FREE
+            $totalBaseQty = $baseQtyPurchased + $baseQtyFree; // Total items in stock
 
-            // 3. CALCULATE EFFECTIVE COST
-            // Example: Paid 1000 for 10 items + 2 free.
-            // Effective Cost = 1000 / 12 = 83.33
+            // 3. CALCULATE COSTS
+            
+            // A. List Cost Snapshot (Supplier's Official Price)
+            // Formula: Total Paid / Purchased Qty (Ignore free items)
+            $unitCostSnapshot = 0;
+            if ($baseQtyPurchased > 0) {
+                $unitCostSnapshot = $request->total_cost / $baseQtyPurchased;
+            }
+
+            // B. Effective Cost (Real Cost with Freebies)
+            // Formula: Total Paid / Total Qty (Purchased + Free)
             $effectiveCost = 0;
             if ($totalBaseQty > 0) {
                 $effectiveCost = $request->total_cost / $totalBaseQty;
             }
 
-            // 4. SAVE BATCH
+            // 4. CALCULATE DUE DATE (If Consignment)
+            $dueDate = null;
+            if ($request->has('is_consignment')) {
+                $supplier = Supplier::find($request->supplier_id);
+                // If supplier has terms (e.g. 30 days), add to received date
+                if ($supplier && $supplier->default_term_days > 0) {
+                    $dueDate = Carbon::parse($request->received_date)->addDays($supplier->default_term_days);
+                }
+            }
+
+            // 5. SAVE BATCH
             InventoryBatch::create([
                 'product_id' => $product->id,
                 'supplier_id' => $request->supplier_id,
+                
+                // Quantity Logic
                 'quantity_purchased' => $baseQtyPurchased,
                 'quantity_free' => $baseQtyFree,
                 'total_quantity' => $totalBaseQty,
-                'remaining_quantity' => $totalBaseQty, // Initially, remaining = total
-                'supplier_price' => $request->total_cost, // Amount on receipt
+                'remaining_quantity' => $totalBaseQty, // Initially full
+                
+                // Costing Logic
+                'supplier_price' => $request->total_cost, // Total Receipt Amount
                 'total_cost' => $request->total_cost,
-                'effective_cost_per_unit' => $effectiveCost,
+                
+                'unit_cost_snapshot' => $unitCostSnapshot,   // <--- SAVES LIST PRICE (e.g. 10.00)
+                'effective_cost_per_unit' => $effectiveCost, // <--- SAVES REAL COST (e.g. 9.09)
+                'srp_snapshot' => $product->retail_price,    // <--- SAVES SELLING PRICE
+                
+                // Dates & Codes
                 'received_date' => $request->received_date,
                 'expiry_date' => $request->expiry_date,
                 'batch_code' => $request->batch_code,
+                
+                // Status
                 'is_consignment' => $request->has('is_consignment'),
+                'due_date' => $dueDate,
             ]);
 
-            // Optional: Update Product's "Current Cost" to this latest batch cost
+            // Optional: Update Product's "Current Cost" to this latest effective cost
             $product->update(['unit_cost' => $effectiveCost]);
         });
 
         return redirect()->back()->with('success', 'Stocks received successfully!');
     }
-
-    // public function showCurrentStock()
-    // {
-    //     // 2. Fetch all active suppliers
-    //     $suppliers = Supplier::where('is_active', true)->get();
-
-    //     // 3. Fetch products (you likely need this too for the table)
-    //     $products = Product::with('units')->get();
-
-    //     // 4. Pass the variables to the view using compact()
-    //     return view('admin.inventory.currentstock', compact('suppliers', 'products'));
-    // }
 }

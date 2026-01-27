@@ -2,64 +2,84 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\InventoryBatch;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'category_id',
-        'name',
-        'brand',
-        'base_unit',
-        'retail_price',
-        'unit_cost',
-        'alert_level',
-    ];
+    protected $guarded = [];
 
-    public function category()
+    // Relationships
+    public function category() { return $this->belongsTo(Category::class); }
+    public function units() { return $this->hasMany(ProductUnit::class); }
+    public function batches() { return $this->hasMany(InventoryBatch::class); }
+
+    /**
+     * 1. Get Total Stock Count (Base Units / Tingi)
+     * e.g., Returns 3,940 (Kilos)
+     */
+    public function getOnHandAttribute()
     {
-        return $this->belongsTo(Category::class);
+        return $this->batches()->where('remaining_quantity', '>', 0)->sum('remaining_quantity');
     }
 
-    // Relationship: A Product has many larger container sizes
-    public function units()
+    /**
+     * 2. Calculate Weighted Average Cost
+     * Formula: (Sum of Total Value of Stocks) / (Total Stocks)
+     */
+    public function getAvgCostAttribute()
     {
-        return $this->hasMany(ProductUnit::class);
+        $batches = $this->batches()->where('remaining_quantity', '>', 0)->get();
+        
+        if ($batches->isEmpty()) return 0;
+
+        $totalValue = $batches->sum(fn($b) => $b->remaining_quantity * $b->effective_cost_per_unit);
+        $totalQty = $batches->sum('remaining_quantity');
+
+        return $totalQty > 0 ? ($totalValue / $totalQty) : 0;
     }
 
-    // app/Models/Product.php
+    /**
+     * 3. Get Total Asset Value
+     * e.g., Returns ₱ 138,372.12
+     */
+    public function getTotalAssetValueAttribute()
+    {
+        return $this->on_hand * $this->avg_cost;
+    }
 
-public function getStockLabelAttribute()
-{
-    // 1. Get the total stock (Assume you fetch this from your inventory batch table)
-    // For now, let's pretend we have a column 'total_stock' or use a temporary number.
-    $totalStock = $this->total_stock ?? 0; // e.g., 251 sachets
+    /**
+     * 4. Smart Stock Breakdown (The "Bag" vs "Kilo" logic)
+     * Returns an array: ['major_name' => 'Bag', 'major_qty' => 78, 'minor_name' => 'Kilo', 'minor_qty' => 40]
+     */
+    public function getStockBreakdownAttribute()
+    {
+        $totalStock = $this->on_hand;
+        
+        // Find the largest unit (e.g. Bag/Sack)
+        $largestUnit = $this->units()->orderBy('conversion_factor', 'desc')->first();
 
-    // 2. Check if this product has larger containers
-    // We sort by conversion_factor DESC (Largest unit first: Carton -> Box)
-    $largestUnit = $this->units()->orderBy('conversion_factor', 'desc')->first();
+        if ($largestUnit && $largestUnit->conversion_factor > 1) {
+            $majorQty = floor($totalStock / $largestUnit->conversion_factor);
+            $minorQty = $totalStock % $largestUnit->conversion_factor;
 
-    if ($largestUnit) {
-        $factor = $largestUnit->conversion_factor; // e.g., 240 (Carton) or 10 (Box)
-        
-        // INTEGER DIVISION: How many whole big units do we have?
-        $bigUnitsCount = floor($totalStock / $factor); // 251 / 10 = 25 Boxes
-        
-        // MODULO: What is left over?
-        $remainder = $totalStock % $factor; // 251 % 10 = 1 Sachet
-        
-        // 3. Format the Output
-        if ($bigUnitsCount > 0 && $remainder > 0) {
-            return "{$bigUnitsCount} {$largestUnit->unit_name}(s) & {$remainder} {$this->base_unit}(s)";
-        } elseif ($bigUnitsCount > 0) {
-            return "{$bigUnitsCount} {$largestUnit->unit_name}(s)";
+            return [
+                'major_name' => $largestUnit->unit_name,
+                'major_qty'  => $majorQty,
+                'minor_name' => $this->base_unit,
+                'minor_qty'  => $minorQty,
+            ];
         }
-    }
 
-    // Default: Just show base unit if no larger container exists or stock is small
-    return "{$totalStock} {$this->base_unit}(s)";
-}
+        // If no larger unit, everything is "On Hand"
+        return [
+            'major_name' => '-',
+            'major_qty'  => '-',
+            'minor_name' => $this->base_unit,
+            'minor_qty'  => $totalStock,
+        ];
+    }
 }
