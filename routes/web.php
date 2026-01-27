@@ -60,6 +60,28 @@ Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('sup
 
 Route::get('/inventory/stock-in', [StockInController::class, 'index'])->name('stock_in.index');
 Route::post('/inventory/stock-in', [StockInController::class, 'store'])->name('stock_in.store');
+
+Route::get('/inventory/products', [ProductController::class, 'index'])->name('admin.inventory.products');
+Route::post('/inventory/products', [ProductController::class, 'storeProduct'])->name('product.store');
+
+// Inventory Main Page (Index)
+// Route::get('/inventory/products', [ProductController::class, 'index'])->name('admin.inventory.products');
+
+// Create & Store
+Route::post('/inventory/products', [ProductController::class, 'storeProduct'])->name('product.store');
+
+// Edit & Update
+Route::put('/inventory/products/{id}', [ProductController::class, 'updateProduct'])->name('product.update');
+
+// Archive (Soft Delete)
+Route::delete('/inventory/products/{id}', [ProductController::class, 'archiveProduct'])->name('product.archive');
+
+// Restore (Bring back from Archive) - THIS IS CRITICAL
+Route::post('/inventory/products/{id}/restore', [ProductController::class, 'restoreProduct'])->name('product.restore');
+
+// Categories
+Route::post('/inventory/category', [ProductController::class, 'storeCategory'])->name('category.store');
+
 });
 
 require __DIR__.'/auth.php';

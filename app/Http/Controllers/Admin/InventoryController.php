@@ -37,10 +37,10 @@ class InventoryController extends Controller
     $allProducts = Product::with('units')->where('alert_level', '>=', 0)->get();
 
     return view('admin.inventory.currentstock', compact('products', 'categories', 'suppliers', 'allProducts'));
+}
 
     public function forRelease(){
         return view('admin.inventory.forrelease');
     }
 }
 
-}
