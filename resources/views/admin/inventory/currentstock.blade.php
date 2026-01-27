@@ -72,6 +72,7 @@
                    <i class="fa-solid fa-plus-circle"></i> Add Stock (Stock In)
                 </button>
             </div>
+            <h1 id="discrepancytitle" class="text-xl font-bold text-red-600 border-2 p-2 rounded-lg border-red-700 hidden">Discrepancy Detected : 1</h1>
         </div>
 
         <div class="w-full overflow-x-auto border border-gray-200 rounded-xl shadow-lg bg-white">

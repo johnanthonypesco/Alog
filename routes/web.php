@@ -44,7 +44,9 @@ Route::middleware('auth')->group(function () {
     
     // A. Current Stock (Kept your original controller for stock viewing if needed)
     Route::get('/inventory/current-stock', [InventoryController::class, 'showCurrentStock'])->name('admin.inventory.currentstock');
-
+    
+    // For Release Page
+    Route::get('/inventory/for-release', [InventoryController::class, 'forRelease'])->name('admin.inventory.forrelease');
     // B. Product Management (UPDATED: Uses the new ProductController)
     // This loads the page with the Category Dropdown and Product Table
     Route::get('/inventory/products', [ProductController::class, 'index'])->name('admin.inventory.products');
@@ -53,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/inventory/category/store', [ProductController::class, 'storeCategory'])->name('category.store');
     Route::post('/inventory/product/store', [ProductController::class, 'storeProduct'])->name('product.store');
 
-    Route::get('/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers.index');
+    Route::get('/inventory/suppliers', [SupplierController::class, 'index'])->name('admin.suppliers.index');
 Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
 
 Route::get('/inventory/stock-in', [StockInController::class, 'index'])->name('stock_in.index');

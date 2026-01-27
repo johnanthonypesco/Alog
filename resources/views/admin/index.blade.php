@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aalog Login</title>
+    <title>ALOG</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
 </head>
-<body class="bg-gradient-to-r from-[#076637] to-[#12A65A] min-h-screen flex items-center justify-center flex-col gap-5 p-5">
-    
+<body class="bg-no-repeat bg-center bg-cover min-h-screen flex items-center justify-center flex-col gap-5 p-5" style="background-image: url('{{ asset('images/Login BG.png') }} ') ; background-size: cover; background-position: center;">
     <h1 class="p-4 rounded-lg bg-white text-green-800 font-bold text-2xl text-center shadow-lg">
         ALOG AGRICULTURAL SUPPLY
     </h1>
 
-    <div class="bg-white p-10 rounded-3xl w-full max-w-3xl flex flex-col-reverse md:flex-row items-center gap-5 relative shadow-2xl">
+    <div class="bg-white p-10 rounded-3xl w-full max-w-2xl flex flex-col-reverse md:flex-row items-center gap-5 relative shadow-2xl">
         
         <div class="w-full md:max-w-[60%]">
-            <h1 class="text-3xl text-green-800 font-semibold">System Login</h1>
+            <h1 class="text-3xl text-green-800 font-semibold">Owner Login</h1>
             
             <form method="POST" action="{{ route('login') }}" class="mt-8">
                 @csrf <div class="mb-4">
@@ -59,17 +58,17 @@
                     <label for="remember_me" class="text-green-800 font-semibold text-lg cursor-pointer">Remember Me</label>
                 </div>
 
-                <button type="submit" class="bg-[#EB7100] text-white font-semibold px-8 py-2 rounded-2xl mt-8 hover:bg-orange-600 transition hover:-translate-y-1 w-full md:w-fit text-xl flex items-center justify-center shadow-md cursor-pointer">
+                <button type="submit" class="bg-[#EB7100] text-white font-semibold px-8 py-2 rounded-2xl mt-8 hover:bg-orange-600 transition hover:-translate-y-1 w-full md:w-fit text-xl flex items-center justify-center shadow-md cursor-pointer z-1">
                     Sign In
                 </button>
             </form>
             </div>
 
-        <div class="w-full md:max-w-[40%] h-fit md:h-72 flex flex-col items-center justify-center">
+        <div class="w-full md:max-w-[40%] h-fit md:h-72 flex flex-col items-center">
             <img src="{{ asset('images/Logo.png') }}" alt="Logo" class="w-40 drop-shadow-lg">
         </div>
 
-        <div class="absolute bottom-0 right-0 w-24 md:w-32 opacity-80 pointer-events-none">
+        <div class="absolute bottom-0 right-0 w-24 md:w-46 opacity-80 pointer-events-none z-0">
             <img src="{{ asset('images/Flower 4 - Green.png') }}" alt="Flower">
         </div>
     </div>

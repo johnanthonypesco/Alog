@@ -126,21 +126,21 @@
         </div>
 
         {{-- Create Employee Modal --}}
-        @include('components.admin.inventory.createemployeemodal')
+        @include('components.admin.employee.createemployeemodal')
         {{-- Edit Employee Modal--}}
-        @include('components.admin.inventory.editemployeemodal')
+        @include('components.admin.employee.editemployeemodal')
         {{-- Role Management Modal --}}
-        @include('components.admin.inventory.rolemanagementmodal')
+        @include('components.admin.employee.rolemanagementmodal')
         {{-- View Archived Role Modal --}}
-        @include('components.admin.inventory.archiverolemodal')
+        @include('components.admin.employee.archiverolemodal')
         {{-- Create Employee Role --}}
-        @include('components.admin.inventory.createemployeerole')
+        @include('components.admin.employee.createemployeerole')
         {{-- Edit Employee Role --}}
-        @include('components.admin.inventory.editemployeerole')   
+        @include('components.admin.employee.editemployeerole')   
         {{-- View Archived Modal --}}
-        @include('components.admin.inventory.archivemodal')      
+        @include('components.admin.employee.archivemodal')      
         {{-- cash advancement --}}
-        @include('components.admin.inventory.cashadvancement')
+        @include('components.admin.employee.cashadvancement')
         
         
     </main>

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Admin\Inventory;
+namespace App\View\Components\Admin\Inventory\CurrentStock;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Archivemodal extends Component
+class Addstockmodal extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Archivemodal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.inventory.archivemodal');
+        return view('components.admin.inventory.current-stock.addstockmodal');
     }
 }

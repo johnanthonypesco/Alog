@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Admin\Inventory;
+namespace App\View\Components\Admin\Employee;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Rolemanagementmodal extends Component
+class cashadvancement extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Rolemanagementmodal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.inventory.rolemanagementmodal');
+        return view('components.admin.employee.cashadvancement');
     }
 }

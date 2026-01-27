@@ -35,3 +35,25 @@ button:hover{
 ::-webkit-scrollbar-thumb:hover {
     background: #046636;
 }
+.success{
+    animation: fromrighttoleft 0.5s ease-in-out;
+}
+.modal{
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fromrighttoleft {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
