@@ -27,96 +27,93 @@ class StockInController extends Controller
         return view('admin.inventory.currentstock', compact('suppliers', 'allProducts', 'products', 'categories'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'supplier_id' => 'required|exists:suppliers,id',
-            'product_id' => 'required|exists:products,id',
-            'unit_type' => 'required', // "Base" or "Box" or "Carton"
-            'quantity' => 'required|numeric|min:1', // Qty PURCHASED (Paid)
-            'free_quantity' => 'nullable|numeric|min:0', // Qty FREE
-            'total_cost' => 'required|numeric|min:0',
-            'received_date' => 'required|date',
+   public function store(Request $request)
+{
+    $request->validate([
+        'supplier_id' => 'required|exists:suppliers,id',
+        'product_id' => 'required|exists:products,id',
+        
+        // We now accept TWO unit types
+        'unit_type_purchased' => 'required', 
+        'unit_type_free' => 'nullable', 
+        
+        'quantity' => 'required|numeric|min:1',
+        'free_quantity' => 'nullable|numeric|min:0',
+        'total_cost' => 'required|numeric|min:0',
+        'received_date' => 'required|date',
+    ]);
+
+    DB::transaction(function () use ($request) {
+        $product = Product::with('units')->find($request->product_id);
+        
+        // 1. RESOLVE MULTIPLIER FOR PURCHASED ITEMS
+        $paidMultiplier = 1; // Default to Base
+        if ($request->unit_type_purchased !== 'base') {
+            $unit = $product->units->where('unit_name', $request->unit_type_purchased)->first();
+            if ($unit) $paidMultiplier = $unit->conversion_factor;
+        }
+
+        // 2. RESOLVE MULTIPLIER FOR FREE ITEMS
+        $freeMultiplier = 1; // Default to Base
+        // If user didn't select a specific free unit, assume it's the same as purchased, 
+        // OR default to base. Let's default to whatever they sent in the request.
+        if ($request->filled('unit_type_free') && $request->unit_type_free !== 'base') {
+            $unit = $product->units->where('unit_name', $request->unit_type_free)->first();
+            if ($unit) $freeMultiplier = $unit->conversion_factor;
+        }
+
+        // 3. CALCULATE TOTAL BASE UNITS
+        // Example: 10 Boxes (x10) + 5 Sachets (x1) = 100 + 5 = 105 Total Base Units
+        $baseQtyPurchased = $request->quantity * $paidMultiplier; 
+        $baseQtyFree = ($request->free_quantity ?? 0) * $freeMultiplier; 
+        $totalBaseQty = $baseQtyPurchased + $baseQtyFree;
+
+        // 4. CALCULATE COSTS (Same logic as before, just using the new base totals)
+        
+        // A. List Cost Snapshot (Cost per BASE UNIT based on paid amount)
+        $unitCostSnapshot = 0;
+        if ($baseQtyPurchased > 0) {
+            $unitCostSnapshot = $request->total_cost / $baseQtyPurchased;
+        }
+
+        // B. Effective Cost (Cost per BASE UNIT including freebies)
+        $effectiveCost = 0;
+        if ($totalBaseQty > 0) {
+            $effectiveCost = $request->total_cost / $totalBaseQty;
+        }
+
+        // ... Date Logic ...
+        $dueDate = null;
+        if ($request->has('is_consignment')) {
+            $supplier = Supplier::find($request->supplier_id);
+            if ($supplier && $supplier->default_term_days > 0) {
+                $dueDate = Carbon::parse($request->received_date)->addDays($supplier->default_term_days);
+            }
+        }
+
+        // 5. SAVE BATCH
+        InventoryBatch::create([
+            'product_id' => $product->id,
+            'supplier_id' => $request->supplier_id,
+            'quantity_purchased' => $baseQtyPurchased,
+            'quantity_free' => $baseQtyFree,
+            'total_quantity' => $totalBaseQty,
+            'remaining_quantity' => $totalBaseQty,
+            'supplier_price' => $request->total_cost,
+            'total_cost' => $request->total_cost,
+            'unit_cost_snapshot' => $unitCostSnapshot,
+            'effective_cost_per_unit' => $effectiveCost,
+            'srp_snapshot' => $product->retail_price,
+            'received_date' => $request->received_date,
+            'expiry_date' => $request->expiry_date,
+            'batch_code' => $request->batch_code,
+            'is_consignment' => $request->has('is_consignment'),
+            'due_date' => $dueDate,
         ]);
 
-        DB::transaction(function () use ($request) {
-            $product = Product::with('units')->find($request->product_id);
-            
-            // 1. RESOLVE MULTIPLIER (Convert Box to Sachets)
-            $multiplier = 1;
-            
-            if ($request->unit_type !== 'base') {
-                // Find the conversion factor for the selected unit (e.g. Box)
-                $unit = $product->units->where('unit_name', $request->unit_type)->first();
-                if ($unit) {
-                    $multiplier = $unit->conversion_factor;
-                }
-            }
+        // Don't overwrite master cost automatically, as discussed.
+    });
 
-            // 2. CALCULATE QUANTITIES
-            $baseQtyPurchased = $request->quantity * $multiplier; // The items you PAID for
-            $baseQtyFree = ($request->free_quantity ?? 0) * $multiplier; // The items you got for FREE
-            $totalBaseQty = $baseQtyPurchased + $baseQtyFree; // Total items in stock
-
-            // 3. CALCULATE COSTS
-            
-            // A. List Cost Snapshot (Supplier's Official Price)
-            // Formula: Total Paid / Purchased Qty (Ignore free items)
-            $unitCostSnapshot = 0;
-            if ($baseQtyPurchased > 0) {
-                $unitCostSnapshot = $request->total_cost / $baseQtyPurchased;
-            }
-
-            // B. Effective Cost (Real Cost with Freebies)
-            // Formula: Total Paid / Total Qty (Purchased + Free)
-            $effectiveCost = 0;
-            if ($totalBaseQty > 0) {
-                $effectiveCost = $request->total_cost / $totalBaseQty;
-            }
-
-            // 4. CALCULATE DUE DATE (If Consignment)
-            $dueDate = null;
-            if ($request->has('is_consignment')) {
-                $supplier = Supplier::find($request->supplier_id);
-                // If supplier has terms (e.g. 30 days), add to received date
-                if ($supplier && $supplier->default_term_days > 0) {
-                    $dueDate = Carbon::parse($request->received_date)->addDays($supplier->default_term_days);
-                }
-            }
-
-            // 5. SAVE BATCH
-            InventoryBatch::create([
-                'product_id' => $product->id,
-                'supplier_id' => $request->supplier_id,
-                
-                // Quantity Logic
-                'quantity_purchased' => $baseQtyPurchased,
-                'quantity_free' => $baseQtyFree,
-                'total_quantity' => $totalBaseQty,
-                'remaining_quantity' => $totalBaseQty, // Initially full
-                
-                // Costing Logic
-                'supplier_price' => $request->total_cost, // Total Receipt Amount
-                'total_cost' => $request->total_cost,
-                
-                'unit_cost_snapshot' => $unitCostSnapshot,   // <--- SAVES LIST PRICE (e.g. 10.00)
-                'effective_cost_per_unit' => $effectiveCost, // <--- SAVES REAL COST (e.g. 9.09)
-                'srp_snapshot' => $product->retail_price,    // <--- SAVES SELLING PRICE
-                
-                // Dates & Codes
-                'received_date' => $request->received_date,
-                'expiry_date' => $request->expiry_date,
-                'batch_code' => $request->batch_code,
-                
-                // Status
-                'is_consignment' => $request->has('is_consignment'),
-                'due_date' => $dueDate,
-            ]);
-
-            // Optional: Update Product's "Current Cost" to this latest effective cost
-            $product->update(['unit_cost' => $effectiveCost]);
-        });
-
-        return redirect()->back()->with('success', 'Stocks received successfully!');
-    }
+    return redirect()->back()->with('success', 'Stocks received successfully!');
+}
 }
