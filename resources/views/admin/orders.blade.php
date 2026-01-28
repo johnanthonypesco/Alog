@@ -47,9 +47,10 @@
                 View Archived
             </button>
         </div>
+
         <div class="w-full overflow-auto border-2 border-[#046636] rounded-lg mt-5">
             <table class="w-full">
-                <thead class="bg-[#046636]/20">
+                <thead class="bg-gray-100 sticky top-0">
                     <tr>
                         
                         <th class="p-5 text-left">Man. Doc</th>
@@ -61,44 +62,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="p-5 text-left">123</td>
-                        <td class="p-5 text-left">Ronald Trump</td>
-                        <td class="p-5 text-left">Walk In</td>
-                        <td class="p-5 text-left flex flex-col">
-                            <h1>14-14-14</h1>
-                            <h1>Swire</h1>
-                        </td>
-                        <td class="p-5 text-left">
-                            ₱ 12,123.00
-                        </td>
-                        <td>
-                            <div class="flex items-center justify-center gap-2">
-                                <button id="cashadvancementbtn" class="p-2 bg-green-200 rounded-md">View Details</button>
-                                <button id="editemployeebtn" class="p-2 bg-blue-200 rounded-md"><i class="fa-solid fa-pencil text-blue-700"></i></button>
-                                <button class="p-2 bg-red-200 rounded-md"><i class="fa-solid fa-trash text-red-700"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-5 text-left">123</td>
-                        <td class="p-5 text-left">Ronald Trump</td>
-                        <td class="p-5 text-left">Walk In</td>
-                        <td class="p-5 text-left flex flex-col">
-                            <h1>14-14-14</h1>
-                            <h1>Swire</h1>
-                        </td>
-                        <td class="p-5 text-left">
-                            ₱ 12,123.00
-                        </td>
-                        <td>
-                            <div class="flex items-center justify-center gap-2">
-                                <button id="cashadvancementbtn" class="p-2 bg-green-200 rounded-md">View Details</button>
-                                <button id="editemployeebtn" class="p-2 bg-blue-200 rounded-md"><i class="fa-solid fa-pencil text-blue-700"></i></button>
-                                <button class="p-2 bg-red-200 rounded-md"><i class="fa-solid fa-trash text-red-700"></i></button>
-                            </div>
-                        </td>
-                    </tr>
                     <tr>
                         <td class="p-5 text-left">123</td>
                         <td class="p-5 text-left">Ronald Trump</td>

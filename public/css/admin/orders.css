@@ -17,7 +17,7 @@ table tbody tr td{
     font-weight: 500;
 }
 table tbody tr:nth-child(even){
-    background-color: #d1d1d1b1;
+    background-color: #d1d1d142;
 }
 .modal{
     animation: fadeIn 0.3s ease-in-out;
