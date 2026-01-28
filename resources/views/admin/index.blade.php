@@ -7,6 +7,7 @@
     <title>ALOG</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
 </head>
 <body class="bg-no-repeat bg-center bg-cover min-h-screen flex items-center justify-center flex-col gap-5 p-5" style="background-image: url('{{ asset('images/Login BG.png') }} ') ; background-size: cover; background-position: center;">
     <h1 class="p-4 rounded-lg bg-white text-green-800 font-bold text-2xl text-center shadow-lg">

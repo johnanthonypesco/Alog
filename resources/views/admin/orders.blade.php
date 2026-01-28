@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
     <link rel="stylesheet" href="{{ asset('css/admin/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/orders.css') }}">
+    {{-- logo link url --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <title>AAS</title>
 </head>
 <body>

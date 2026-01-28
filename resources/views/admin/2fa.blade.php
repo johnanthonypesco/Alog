@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <title>AAS</title>
 </head>
 <body class="bg-gradient-to-r from-[#076637] to-[#12A65A] min-h-screen flex items-center justify-center flex-col gap-5 p-5">

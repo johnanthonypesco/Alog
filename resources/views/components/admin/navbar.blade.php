@@ -13,7 +13,6 @@
                 <i class="fa-solid fa-angle-down transition-transform duration-300" id="inventory-icon"></i>
             </a>
             <ul class="overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out" id="inventory-menu">
-                {{-- menu na ilalagay dito para sa accounting --}}
                 <li class="flex flex-col gap-1 text-white text-sm font-semibold mt-2 w-full pl-6">
                     <a href="{{route('admin.inventory.currentstock')}}" class="text-lg {{ request()->routeIs('admin.inventory.currentstock') ? 'active' : '' }}">Current Stocks</a>
                     <a href="{{route('admin.inventory.forrelease')}}" class="text-lg {{ request()->routeIs('admin.inventory.forrelease') ? 'active' : ''}}">For Release</a>
@@ -30,7 +29,6 @@
                 <i class="fa-solid fa-angle-down transition-transform duration-300" id="accounting-icon"></i>
             </a>
             <ul class="overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out" id="accounting-menu">
-                {{-- menu na ilalagay dito para sa accounting --}}
                 <li class="flex flex-col gap-1 text-white text-sm font-semibold mt-2 w-full pl-6">
                     <a href="#" class="text-lg">Cooperatives</a>
                     <a href="#" class="text-lg">Big Land Owners</a>
