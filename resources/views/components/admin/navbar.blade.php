@@ -22,7 +22,7 @@
                 </li>
             </ul>
         </li>
-        <a href="#" class="text-xl font-bold p-2 ml-5">Orders</a>
+        <a href="{{route('admin.orders')}}" class="text-xl font-bold p-2 ml-5 {{request()->routeIs('admin.orders') ? 'active' : ''  }}">Orders</a>
         
         <li class="w-full pl-5">
             <a href="#" onclick="openmenu(event, 'accounting')" class="text-xl font-bold flex items-center justify-between p-2 pl-6">

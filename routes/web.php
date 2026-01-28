@@ -9,12 +9,12 @@ use App\Http\Controllers\Admin\StockInController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\OrderController;
 
 // NEW: Import the ProductController we just created
 use App\Http\Controllers\AdminController\LoginController;
 use App\Http\Controllers\AdminController\EmployeeController;
 use App\Http\Controllers\AdminController\TwofactorController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,6 +81,9 @@ Route::post('/inventory/products/{id}/restore', [ProductController::class, 'rest
 
 // Categories
 Route::post('/inventory/category', [ProductController::class, 'storeCategory'])->name('category.store');
+
+// Orders
+Route::get('/orders', [OrderController::class, 'showOrders'])->name('admin.orders');
 
 });
 

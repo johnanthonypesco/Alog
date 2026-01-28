@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.1.0/css/all.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/admin/navbar.css') }}">
 </head>
 <body class="bg-gray-50">
 
@@ -349,5 +350,7 @@
             }
         }
     </script>
+    <script src="{{asset('js/admin/navbar.js')}}"></script>
+
 </body>
 </html>
